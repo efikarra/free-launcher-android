@@ -1,0 +1,113 @@
+<ion-view view-title="My job details" style="background-color: #FFF0E6">
+    <ion-content>
+        <center>
+            <h1>{{myJob.title}}</h1>
+            <div class="item-text-wrap">
+                {{myJob.shortDescr}}
+            </div>
+        </center>
+        <div class="list card">
+            <div class="item">
+                <div class="item-text-wrap">
+                    <strong> Description:</strong> {{myJob.longDescr}}
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-text-wrap">
+                    <strong>Employer:</strong> {{myJob.employer.firstname}} {{myJob.employer.lastname}} (email: {{myJob.employer.email}})
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-text-wrap">
+                    <strong>Location:</strong> {{myJob.country}} {{myJob.city}} {{myJob.location}}
+                </div>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider">
+                Evaluations for employer
+            </div>
+            <ion-list>
+                <ion-item class="item-avatar-left" ng-repeat="evaluation in employerEvaluations" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <div class="row responsive-sm">
+                        <div class="col item-text-wrap">
+                            {{evaluation.user.username}}
+                        </div>
+                        <div class="col item-text-wrap">
+                            <strong>Comment:</strong> {{evaluation.comment}}
+                            <br>
+                            <strong>Rating:</strong> {{evaluation.rating}}</p>
+                        </div>
+                        <div class="col">
+                            <div ng-show="evaluation.user.userId==userId">
+                                <button ng-click=editEvalFunc(evaluation) class="button button-icon icon ion-edit calm"></button>
+                                <button ng-click="deleteEvalFunc(evaluation)" class="button button-icon icon ion-trash-a assertive" style="margin-left:10px"></button>
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div class="list card" ng-show="firstEval">
+            <div class="item item-divider">
+                Submit your evaluation
+            </div>
+
+            <form name="saveEvalForm" novalidate ng-submit="saveEvalForm.$valid&&updateBid()">
+                <div class="row responsive-sm">
+                    <label class="item col">
+                        <input name="rating" type="number" step="0.01" placeholder="rating" ng-model="newEmployerEvaluation.rating" style="background-color: #E0F5FF" ng-max=10 required>
+                    </label>
+
+                    <label class="item item-input col" style="margin-left:30px">
+                        <textarea name="comment" placeholder="Comment" ng-model="newEmployerEvaluation.comment" ng-maxlength=200 required></textarea>
+                    </label>
+                    <div class="col">
+                        <button type="submit" style="margin-left:50px" type="button" class="button button-medium button-energized" ng-click="saveEvaluation()" ng-disabled="!saveEvalForm.$valid">Submit</button>
+                    </div>
+                </div>
+                <div class="row responsive-sm">
+                    <div ng-messages="saveEvalForm.rating.$error" class="form-errors col" ng-if="saveEvalForm.rating.$touched">
+                        <div class="form-error item-text-wrap" ng-message="max">Rating should not be more than 10</div>
+                        <div class="form-error item-text-wrap" ng-message="required">Rating is required</div>
+                        <div ng-messages-include="templates/messages.html">
+                        </div>
+                    </div>
+
+                    <div ng-messages="saveEvalForm.comment.$error" class="form-errors col" ng-if="saveEvalForm.comment.$touched">
+                        <div class="form-error item-text-wrap" ng-message="maxlength">Your comment should be at most 200 chars</div>
+                        <div class="form-error item-text-wrap" ng-message="required">Comment is required</div>
+                        <div ng-messages-include="templates/messages.html">
+                        </div>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+
+        <br>
+        <div class="list card">
+            <div class="item item-divider">
+                Evaluations for experts' work at "{{myJob.title}}" made by employer {{myJob.employer.username}}
+            </div>
+            <ion-list>
+                <ion-item class="item-avatar-left" ng-repeat="expEvaluation in expertEvaluations" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <div class="row responsive-sm">
+                        <div class="col item-text-wrap">
+                            {{expEvaluation.user.username}}
+                        </div>
+                        <div class="col item-text-wrap">
+                            <strong>Comment:</strong> {{expEvaluation.comment}}
+                            <br>
+                            <strong>Rating:</strong> {{expEvaluation.rating}}</p>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+
+        </div>
+    </ion-content>
+</ion-view>

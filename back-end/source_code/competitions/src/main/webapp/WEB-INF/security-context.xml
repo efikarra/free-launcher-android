@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+	<context:annotation-config />
+<global-method-security secured-annotations="enabled"/>
+	<!-- <http pattern="/competitions/authenticate" security="none"/>  -->
+	   
+	<security:http realm="Protected API" use-expressions="true" auto-config="false"
+		create-session="stateless" entry-point-ref="unauthorizedEntryPoint"
+		authentication-manager-ref="authenticationManager">
+		
+		<csrf disabled="true" />
+		<security:intercept-url pattern="/authenticate" access="permitAll"/> 
+		<security:intercept-url pattern="/experts" method="POST" access="permitAll"/>
+		<security:intercept-url pattern="/employers" method="POST" access="permitAll"/>
+		<security:intercept-url pattern="/qualifications" method="GET" access="permitAll"/>
+		<security:intercept-url pattern="/**" access="permitAll" method="OPTIONS"/>
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		<!-- <security:intercept-url  pattern="/competitions/experts/**" access="isFullyAuthenticated()"
+		 />
+		<security:intercept-url pattern="/competitions/projects/**" access="isFullyAuthenticated()" /> -->
+		<security:custom-filter ref="authenticationTokenProcessingFilter"
+			position="BASIC_AUTH_FILTER" />
+	</security:http>
+
+
+
+
+
+	<beans:bean id="myUserDetailsService"
+		class="app.competitions.spring.security.MyUserDetailsService" />
+	<beans:bean id="tokenProvider"
+		class="app.competitions.spring.security.TokenProvider" />
+	<beans:bean id="bCryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<beans:bean id="unauthorizedEntryPoint"
+		class="app.competitions.spring.security.UnauthorizedEntryPoint" />
+
+	<beans:bean
+		class="app.competitions.spring.security.AuthenticationTokenProcessingFilter"
+		id="authenticationTokenProcessingFilter" />
+
+
+	<security:authentication-manager id="authenticationManager">
+		<security:authentication-provider user-service-ref="myUserDetailsService">
+			<security:password-encoder ref="bCryptPasswordEncoder"></security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans:beans>

@@ -1,0 +1,59 @@
+<ion-modal-view ng-controller="EvaluateExpertCtrl">
+    <ion-header-bar class="bar-calm">
+        <h1 class="title">Evaluate your employee</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list card" ng-show="!firstExpertEval&&!editExpertEval">
+            <div class="item item-divider">
+                Your evaluation
+            </div>
+            <div class="item">
+                <div class="row responsive-sm">
+                    <div class="col item-text-wrap">
+                        <strong>Comment:</strong> {{myExpertEvaluation.comment}}
+                        <br>
+                        <strong>Rating:</strong> {{myExpertEvaluation.rating}}</p>
+                    </div>
+                    <div class="col">
+                        <button ng-click=deleteExpertEvaluationFun() class="button button-icon icon ion-trash-a assertive" style="margin-left:20px"></button>
+
+                        <button ng-click="editExpertEvaluationFun()" class="button button-icon icon ion-edit calm" style="margin-left:20px"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="list card" ng-show="firstExpertEval||editExpertEval">
+            <div class="item item-divider">
+                Submit your evaluation
+            </div>
+                <form name="saveEvalForm" novalidate ng-submit="saveEvalForm.$valid&&saveExpertEvaluation()">
+                        <label class="item col">
+                            <input name="rating" type="number" step="0.01" placeholder="rating" ng-model="newExpertEvaluation.rating" style="background-color: #E0F5FF" ng-max=10>
+                        </label>
+                 
+                        <div ng-messages="saveEvalForm.rating.$error" class="form-errors" ng-if="saveEvalForm.rating.$touched">
+                            <div class="form-error" ng-message="max">Rating should not be more than 10</div>
+                            <div ng-messages-include="templates/messages.html">
+                            </div>
+                        </div>
+                       <br>
+                        <label class="item item-input col" style="margin-left:30px">
+                            <textarea name="comment" placeholder="Comment" ng-model="newExpertEvaluation.comment" ng-maxlength=200></textarea>
+                        </label>
+                        <div ng-messages="saveEvalForm.comment.$error" class="form-errors " ng-if="saveEvalForm.comment.$touched">
+                            <div class="form-error" ng-message="maxlength">Your comment should be at most 200 chars</div>
+                            <div ng-messages-include="templates/messages.html">
+                            </div>
+                        </div>
+   <br>
+                            <button type="submit" style="margin-left:50px" type="button" class="button button-medium button-energized" ng-disabled="!saveEvalForm.$valid">Submit</button>
+                            <button type="button" style="margin-left:20px" type="button" class="button button-medium button-assertive" ng-click="cancelEval()">Cancel</button>
+
+
+                </form>
+    
+        </div>
+    </ion-content>
+</ion-modal-view>

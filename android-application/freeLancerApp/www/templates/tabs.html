@@ -1,0 +1,33 @@
+<ion-view view-title="Welcome">
+    <ion-tabs class="tabs-icon-top tabs-positive">
+
+     <ion-tab ng-if="role=='EMPLOYEE_ROLE'" title="Search" icon="ion-search" ui-sref="app.tabs.searchProjects.results">
+            <ion-nav-view name="search-projects-tab"></ion-nav-view>
+        </ion-tab>
+        
+         <ion-tab ng-if="role=='EMPLOYER_ROLE'" title="Search" icon="ion-search" ui-sref="app.tabs.searchExperts.results">
+            <ion-nav-view name="search-experts-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="My profile" icon="ion-person" ui-sref="app.tabs.profile">
+            <ion-nav-view name="profile-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Home" icon="ion-information-circled" ui-sref="app.tabs.home" hidden="true">
+            <ion-nav-view name="home-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="My Jobs" icon="ion-information-circled" ui-sref="app.tabs.myJobs.list" hidden="true">
+            <ion-nav-view name="myJobs-tab"></ion-nav-view>
+        </ion-tab>
+         <ion-tab title="My Projects" icon="ion-information-circled" ui-sref="app.tabs.myProjects.list" hidden="true">
+            <ion-nav-view name="myProjects-tab"></ion-nav-view>
+        </ion-tab>
+        </ion-tab>
+        <ion-tab title="My bids" icon="ion-information-circled" ui-sref="app.tabs.myBids" hidden="true">
+            <ion-nav-view name="myBids-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="New job" icon="ion-information-circled" ui-sref="app.tabs.newProject.form" hidden="true">
+            <ion-nav-view name="newProject-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Logout" icon="ion-log-out" ng-click="logout()">
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

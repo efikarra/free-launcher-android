@@ -1,0 +1,36 @@
+<ion-view view-title="Expert details" style="background-color: #FFF0E6">
+    <ion-content>
+        <center>
+            <h1>{{searchedExpert.firstname}}</h1>
+            <p>{{searchedExpert.lastname}}</p>
+        </center>
+        <div class="list card">
+            <a class="item" item-text-wrap>
+                <strong> Username:</strong> {{searchedExpert.username}}
+            </a>
+
+            <a class="item" item-text-wrap>
+                <strong>Email:</strong> {{searchedExpert.email}}
+            </a>
+        </div>
+        <br>
+        <div class="list card">
+            <div class="item item-divider">
+                Qualifications
+            </div>
+            <ion-list>
+                <ion-item class="item-avatar-left" ng-repeat="qual in searchedExpert.qualifications" ng-class-odd="'odd'" ng-class-even="'even'">
+                   <strong>{{qual.title}}</strong>
+                    <p>{{qual.description}}</p>
+
+                </ion-item>
+            </ion-list>
+        </div>
+        <br>
+        <div class="list card">
+            <button ng-click="expertJobsModal()" class="button button-block button-assertive" type="button">{{searchedExpert.username}}'s jobs</button>
+            <br>
+            <button ng-click="notifyExpert()" class="button button-block button-balanced" type="button">Invite expert</button>
+        </div>
+    </ion-content>
+</ion-view>

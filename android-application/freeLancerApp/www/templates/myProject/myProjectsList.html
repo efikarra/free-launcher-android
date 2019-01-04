@@ -1,0 +1,47 @@
+<ion-view view-title="My projects" style="background-color: rgba(216, 212, 225, 0.44)">
+    <ion-content>
+        <div class="list card">
+
+            <div class="item item-divider" style="background-color: #D6F5D6">
+                Open jobs
+            </div>
+            <div class="item item-text-wrap" ng-repeat="myOpenProject in groups.false">
+                <div class="row responsive-sm">
+                    <div class="col">
+                        <h2><strong>{{myOpenProject.title}}</strong></h2>
+                        <p>{{myOpenProject.shortDescr}}</p>
+                    </div>
+                    <div class="col">
+                        <a ui-sref="app.tabs.myProjects.myProjectEdit.form({myProjectId: myOpenProject.projId})">
+                            <button class="button button-icon icon ion-edit calm"></button>
+                        </a>
+                        <button ng-click=deleteMyProjectFunc(myOpenProject) class="button button-icon icon ion-trash-a assertive" style="margin-left:20px"></button>
+
+                        <button ng-click="findMyProjectBidsFunc(myOpenProject)" class="button button-small button-outline button-balanced" style="margin-left:20px">Bids</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider" style="background-color: #FFEBCC">
+                Closed jobs
+            </div>
+            <div class="item item-text-wrap" ng-repeat="myClosedProject in groups.true">
+                <div class="row responsive-sm">
+                    <div class="col">
+                        <h2><strong>{{myClosedProject.title}}</strong></h2>
+                        <p>{{myClosedProject.shortDescr}}</p>
+                    </div>
+                    <div class="col">
+                        <a ui-sref="app.tabs.myProjects.myProjectDetails({myProjectId: myClosedProject.projId})">
+                            <button class="button button-medium button-outline button-calm">Details</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+
+<ion-list>

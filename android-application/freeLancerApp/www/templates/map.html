@@ -1,0 +1,16 @@
+<ion-view title="map" ng-controller="MapCtrl">
+    <ion-content>
+        <div id="map" data-tap-disabled="true">
+           
+        </div>
+        <br>
+        <div class="item-divider" style="background-color: #FFF0E6">
+         Choose level of location restriction</div>
+        <ion-list>
+        <ion-radio ng-repeat="result in results" ng-value="result.location" ng-model="choice.location">{{result.country}} {{result.location}}</ion-radio>
+        </ion-list>
+
+  <button class="button button-positive" type="button" ng-click="submitLocation()">Done</button>
+  <button class="button button-stable" type="button" ng-click="back()">Cancel</button>
+    </ion-content>
+</ion-view>

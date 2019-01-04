@@ -1,0 +1,55 @@
+<ion-view view-title="Home Page" style="background-color: #EBF5FF">
+    <ion-content>
+
+        <center><h2  style="color:#002593"> Welcome to e-lancer!</h2> </center>
+        <div ng-show="role=='EMPLOYEE_ROLE'">
+         <div class="row responsive-sm">
+             <div class="col">
+         <h2  style="color:#002593">Looking for a job? </h2>
+                 </div>
+              </div>
+              <div class="row responsive-sm">
+             <div class="col">
+            <h4> Find one with 3 clicks - search, select, <span style="font-size:22px;color:red">bid!</span> </h4> 
+                 <div class="row responsive-sm">
+                     <div class="col">
+            
+       </div>
+                      <div class="col">
+                 <a ui-sref="app.tabs.searchProjects.results">
+            <button type="button" class="button button-medium" style="color:#FFFFFF;background-color:#D63333">Search</button>
+            </a>  </div>
+                       </div>
+               </div>
+        <div class="col">
+            <img src="img/Job-Search.jpg" width="80%" height="80%"/>
+       </div>
+       </div>
+            </div>
+        
+         <div ng-show="role=='EMPLOYER_ROLE'">
+         <div class="row responsive-sm">
+             <div class="col">
+         <h2  style="color:#002593">Looking for an employee? </h2>
+                 </div>
+              </div>
+              <div class="row responsive-sm">
+             <div class="col">
+            <h4> Submit a job competition with 1 click! 
+                 <div class="row responsive-sm">
+                     <div class="col">
+            
+       </div>
+                      <div class="col">
+                 <a ui-sref="app.tabs.newProject.form">
+            <button type="button" class="button button-medium" style="color:#FFFFFF;background-color:#D63333">New job</button>
+            </a>  </div>
+                       </div>
+               </div>
+        <div class="col">
+            <img src="img/Job-Search.jpg" width="80%" height="80%"/>
+       </div>
+       </div>
+            </div>
+    </ion-content>
+</ion-view>

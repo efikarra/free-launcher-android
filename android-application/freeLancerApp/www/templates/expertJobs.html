@@ -1,0 +1,21 @@
+<ion-modal-view ng-controller="ExpertJobsCtrl">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">{{searchedExpert.username}}'s jobs</h1>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-avatar-left" ng-repeat="job in searchedExpert.projects">
+                 <div class="row responsive-sm">
+                        <div class="item-text-wrap col">
+                             <strong> {{job.title}}</strong>, {{job.shortDescr}}
+                        </div>
+                       <div class="col item-text-wrap">
+                          <strong>Employer: </strong> {{job.employer.username}} (email: {{job.employer.email}})
+                        </div>
+                     </div>
+               
+                
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>

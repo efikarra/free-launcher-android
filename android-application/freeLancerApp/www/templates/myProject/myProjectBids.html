@@ -1,0 +1,34 @@
+<ion-modal-view ng-controller="MyProjectBidsCtrl">
+    <ion-header-bar class="bar-balanced">
+        <h1 class="title">Choose the best bids and close your job competition!</h1>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="closeProject()">
+            <div class="item-list">
+                <div class="item item-checkbox" ng-repeat="myProjectBid in myProjectBids track by myProjectBid.bidId" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <label class="checkbox">
+                        <input type="checkbox" checklist-model="bids.chosenBids" checklist-value="myProjectBid" checklist-comparator="compareFn"></input>
+                    </label>
+                    <div class="row responsive-sm">
+                        <div class="col">
+                            {{myProjectBid.expert.firstname}} {{myProjectBid.expert.lastname}}
+                            <br><strong>Rating:</strong> {{myProjectBid.expert.rating}}
+                            <br>
+                            <strong>Email:</strong> {{myProjectBid.expert.email}}
+                        </div>
+                        <div class="col">
+                            <strong>Price:</strong> {{myProjectBid.price}}
+                            <br>
+                            <strong>Estimated time:</strong> {{myProjectBid.estTime | date:'yyyy-MM-dd'}}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <center>
+                <button type="submit" class="button button-calm">Close competition</button>
+                <button type="button" class="button button-stable" ng-click="closeModal()">Cancel</button>
+            </center>
+        </form>
+    </ion-content>
+</ion-modal-view>

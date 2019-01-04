@@ -1,0 +1,56 @@
+<ion-view view-title="My project details" style="background-color: #FFF0E6">
+    <ion-content>
+        <center>
+            <h1>{{myClosedProject.title}}</h1>
+            <p>{{myClosedProject.shortDescr}}</p>
+        </center>
+        <div class="list card">
+             <div class="item item-text-wrap" >
+                <strong> Description:</strong> {{myClosedProject.longDescr}}
+
+           </div>
+             <div class="item item-text-wrap" >
+                <strong>Location:</strong> {{myClosedProject.country}} , {{myClosedProject.city}}
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider">
+                Evaluations for employer
+            </div>
+            <ion-list>
+                <ion-item class="item-avatar-left" ng-repeat="empEvaluation in empEvaluations" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <div class="row responsive-sm">
+                        <div class="col">
+                            {{empEvaluation.user.username}}
+                        </div>
+                        <div class="col item-text-wrap">
+                            <strong>Comment:</strong> {{empEvaluation.comment}}
+                            <br>
+                            <strong>Rating:</strong> {{empEvaluation.rating}}</p>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
+    <br>
+        <div class="list card">
+             <div class="item item-divider">
+                Your employees!
+            </div>
+            <ion-list>
+                <ion-item class="item-avatar-left" ng-repeat="expert in projectExperts">
+                    <div class="row responsive-sm">
+                        <div class="col">
+                            {{expert.firstname}}
+                            <br> {{expert.lastname}}
+                        </div>
+                        <div class="col">
+                            <button ng-click=evaluateExpert(expert) class="button button-medium button-positive">Evaluate!</button>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,28 @@
+<ion-view view-title="My bids" style="background-color: rgba(216, 212, 225, 0.44)">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-android-search" ng-click="showFilterBar()"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-avatar-left" ng-repeat="myBid in myBids">
+                <div class="row responsive-sm">
+                    <div class="col">
+                        <div class="item-text-wrap">
+                        {{myBid.project.title}}
+                        <br> {{myBid.project.shortDescr}}
+                            </div>
+                    </div>
+                    <div class="col">
+                        <strong>Price:</strong> {{myBid.price}}
+                        <br>
+                        <strong>Estimated time:</strong> {{myBid.estTime | date:'yyyy-MM-dd'}}</p>
+                    </div>
+                    <div class="col">
+                        <button ng-click=editBidFunc(myBid.bidId) class="button button-icon icon ion-edit calm"></button>
+                        <button ng-click="deleteBidFunc(myBid.bidId)" class="button button-icon icon ion-trash-a assertive" style="margin-left:10px"></button>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

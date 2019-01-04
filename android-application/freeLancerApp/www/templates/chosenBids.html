@@ -1,0 +1,20 @@
+
+        <ion-list>
+            <ion-item class="item item-text-wrap" ng-repeat="chosenBid in bids.chosenBids">
+                <div class="row responsive-sm">
+                    <div class="col">
+                       
+                        {{chosenBid.expert.firstname}} {{chosenBid.expert.lastname}}
+                        <br><strong>Rating:</strong> {{chosenBid.expert.rating}}
+                        <br>
+                        <strong>Email:</strong> {{chosenBid.expert.email}}
+                    </div>
+                    <div class="col">
+                
+                        <strong>Price:</strong> {{chosenBid.price}}
+                        <br>
+                        <strong>Estimated time:</strong> {{chosenBid.estTime | date:'yyyy-MM-dd'}}</p>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>

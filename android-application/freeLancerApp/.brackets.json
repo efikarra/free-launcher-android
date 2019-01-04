@@ -1,0 +1,16 @@
+{
+    "jscodehints.detectedExclusions": [
+        "D:/cordova-apps/freeLancerApp/www/js/service.js",
+        "D:/cordova-apps/freeLancerApp/www/js/app.js",
+        "D:/cordova-apps/freeLancerApp/www/js/constants.js",
+        "D:/cordova-apps/freeLancerApp/www/js/routes.js",
+        "D:/cordova-apps/freeLancerApp/www/js/directives.js",
+        "D:/cordova-apps/freeLancerApp/www/js/controllers.js",
+        "D:/cordova-apps/freeLancerApp/www/js/app/project/project.service.js",
+        "D:/cordova-apps/freeLancerApp/www/js/app/login/login.module.js",
+        "D:/cordova-apps/freeLancerApp/www/js/app/register/register.ctrl.js",
+        "D:/cordova-apps/freeLancerApp/www/js/app/myJob/myJob.ctrl.js",
+        "D:/cordova-apps/freeLancerApp/www/js/app/search/search.ctrl.js",
+        "D:/cordova-apps/freeLancerApp/www/js/app/routes.js"
+    ]
+}

@@ -1,0 +1,102 @@
+<ion-view view-title="Job's details">
+    <ion-content>
+        <div ng-show="editProject.closed">
+            <center>
+                <h3>This project is closed!</h3></center>
+        </div>
+            <form name="productForm" novalidate ng-submit="productForm.$valid&&editMyProject()">
+                <div class="item list-inset">
+                    <label class="item item-input item-floating-label" style="background-color: #FFFFEB">
+                        <span class="input-label">Title</span>
+                        <input name="title" type="text" placeholder="Title" ng-model="editProject.title" required ng-maxlength=50>
+                    </label>
+                    <div ng-messages="productForm.title.$error" class="form-errors" ng-if="productForm.title.$touched">
+                        <div class="form-error" ng-message="maxlength">Title should be at most 50 chars</div>
+                        <div ng-messages-include="templates/messages.html">
+
+                        </div>
+                    </div>
+
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Short description</span>
+                        <input name="shortDescr" type="text" placeholder="Short description" ng-model="editProject.shortDescr" required ng-maxlength=200>
+                    </label>
+                    <div ng-messages="productForm.shortDescr.$error" class="form-errors" ng-if="productForm.shortDescr.$touched">
+                        <div class="form-error" ng-message="maxlength">Short description should be at most 200 chars</div>
+                        <div ng-messages-include="templates/messages.html">
+                        </div>
+                    </div>
+
+                    <label class="item item-input item-floating-label" style="background-color: #FFFFEB">
+                        <span class="input-label">Long description</span>
+                        <textarea style="background-color: #FFFFEB" placeholder="Long description" ng-model="editProject.longDescr">
+                        </textarea>
+                    </label>
+                    <br>
+                    <div class="item item-divider" style="background-color: #D6F5D6">
+                       Current location restriction
+                    </div>
+                    <div class="item item-text-wrap">
+                        <div class="row responsive=sm">
+                            <div class="col">
+                                {{restrictedLocation.restrictionChoice.country}} {{restrictedLocation.restrictionChoice.location}}
+                            </div>
+                            <div class="col">
+                                <a ui-sref="app.tabs.myProjects.myProjectEdit.map">
+                                    <button type="button" class="button button-balanced"> Edit location</button>
+                                </a>
+                                <button type="button" class="button button-stable" ng-click="removeRestriction()" ng-disabled="!(restrictedLocation.restrictionChoice.country && restrictedLocation.restrictionChoice.country)"> Remove location</button>
+                            </div>
+                        </div>
+                    </div>
+<br>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Price limit</span>
+                        <input name="priceLimit" type="number" step=0.01 placeholder="Price" ng-model="editProject.priceLimit" required>
+                    </label>
+                    <div ng-messages="productForm.priceLimit.$error" class="form-errors" ng-if="productForm.priceLimit.$touched">
+                        <div ng-messages-include="templates/messages.html">
+                        </div>
+                    </div>
+<div class="row responsive-sm">
+                    <label class="item item-input col" style="background-color: #FFFFEB">
+                        <span class="input-label">Time completion limit:</span>
+                        <ionic-datepicker style="margin-left:60px" input-obj="datepickerTimeLimit">
+                            <button type="button" class="button button-block button-positive" ng-disabled="editProject.closed"> {{datepickerTimeLimit.inputDate | date:'yyyy-MM-dd'}} </button>
+                        </ionic-datepicker>
+                    </label>
+    </div>
+                    <div class="row responsive-sm">
+                    <label class="item item-input col">
+                        <span class="input-label">Closing date:</span>
+                        <ionic-datepicker style="margin-left:60px" input-obj="datepickerEndDate">
+                            <button type="button" class="button button-block button-energized" ng-disabled="editProject.closed"> {{datepickerEndDate.inputDate | date:'yyyy-MM-dd'}} </button>
+                        </ionic-datepicker>
+                    </label>
+                   </div>
+                    <br>
+                    <button type="button" class="button button-calm" ng-click="hideQualifications()">Edit qualifications</button>
+                    <br>
+                    <div class="list card" ng-show="showQualifications">
+                        <div class="item item-divider" style="background-color: #FFFFEB">
+                            Job's required qualifications
+                        </div>
+                        <div class="nested" ng-controller="QualificationsBoxCtrl">
+                            <div class="item-list">
+                                <div class="item item-checkbox" ng-repeat="qualification in qualifications track by qualification.qualId">
+                                    <label class="checkbox">
+                                        <input ng-disabled="editProject.closed" type="checkbox" checklist-model="editProject.qualifications" checklist-value="qualification" checklist-comparator="compareFn"></input>
+                                    </label>
+                                    {{qualification.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="button button-block button-positive" ng-disabled="!productForm.$valid">Submit</button>
+
+                    <br>
+                    <br>
+
+    </ion-content>
+</ion-view>

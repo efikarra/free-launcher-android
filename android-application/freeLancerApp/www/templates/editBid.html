@@ -1,0 +1,23 @@
+<ion-modal-view ng-controller="EditBidCtrl">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Edit your bid</h1>
+    </ion-header-bar>
+    <ion-content>
+         <form name="editBidForm" novalidate ng-submit="editBidForm.$valid && updateBid()">
+            <div class="item list-inset">
+                <label class="item item-input" style="background-color: #E0F5FF">
+                    <input name="price" type="number" step="0.01" ng-model="editBid.price" required>
+                </label>
+                <div ng-messages="editBidForm.price.$error" class="form-errors" ng-if="editBidForm.price.$touched">
+                    <div ng-messages-include="templates/messages.html">
+                    </div>
+                </div>
+                <ionic-datepicker input-obj="datepickerObject">
+                    <button type="button" class="button button-block button-outline button-calm"> {{datepickerObject.inputDate | date:'yyyy-MM-dd'}} </button>
+                </ionic-datepicker>
+                <br>
+                <button class="button button-block button-assertive" ng-disabled="!editBidForm.$valid" type="submit">Done</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,97 @@
+<ion-view view-title="My profile" style="background-color: #CCEBCC">
+    <ion-content class="padding">
+        <div class="text-right">
+            <span style="background-color: #FFA319;color: #FFFFFF" class="label"><strong>Rating:</strong>
+                    {{rating}}</span>
+        </div>
+        <br>
+        <form name="userProfileForm" novalidate ng-submit="userProfileForm.$valid && editUserChanges()">
+            <div class="item item-divider">
+                Your details
+            </div>
+
+            <div class="list item-list">
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <div ng-show="!editSelected">{{oldUser.username}}</div>
+                    <input ng-show="editSelected" type="text" name="username" ng-model="editUser.username" required ng-maxlength="50">
+                </label>
+                <div ng-messages="userProfileForm.username.$error" class="form-errors" ng-if="userProfileForm.username.$touched" ng-show="editSelected">
+                    <div class="form-error" ng-message="required">Please enter your username</div>
+                    <div class="form-error" ng-message="maxlength">Username should be at most 50 characters</div>
+                    <div ng-messages-include="templates/messages.html">
+                    </div>
+                </div>
+
+                <label class="item item-input">
+                    <span class="input-label">First name</span>
+                    <div ng-show="!editSelected">{{oldUser.firstname}}</div>
+                    <input ng-show="editSelected" type="text" placeholder="First name" name="firstname" ng-model="editUser.firstname" required ng-maxlength="100">
+                </label>
+                <div ng-show="editSelected" ng-messages="userProfileForm.firstname.$error" class="form-errors" ng-if="userProfileForm.firstname.$touched">
+                    <div class="form-error" ng-message="required">Please enter your first name</div>
+                    <div class="form-error" ng-message="maxlength">First name should be at most 100 characters</div>
+                    <div ng-messages-include="templates/messages.html"></div>
+
+                </div>
+                <label class="item item-input">
+                    <span class="input-label">Last name</span>
+                    <div ng-show="!editSelected">{{oldUser.lastname}}</div>
+                    <input ng-show="editSelected" type="text" placeholder="Last name" name="lastname" ng-model="editUser.lastname" required ng-maxlength="100">
+                </label>
+                <div ng-show="editSelected" ng-messages="userProfileForm.lastname.$error" class="form-errors" ng-if="userProfileForm.lastname.$touched">
+                    <div class="form-error" ng-message="required">Please enter your last name</div>
+                    <div class="form-error" ng-message="maxlength">Last name should be at most 100 characters</div>
+                    <div ng-messages-include="templates/messages.html"></div>
+                </div>
+                <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <div ng-show="!editSelected">{{oldUser.email}}</div>
+                    <input ng-show="editSelected" type="email" placeholder="Email" name="email" ng-model="editUser.email" required ng-maxlength="80">
+                </label>
+                <div ng-show="editSelected" ng-messages="userProfileForm.email.$error" class="form-errors" ng-show="userProfileForm.email.$touched">
+                    <div class="form-error" ng-message="maxlength">Email should be at most 80 characters</div>
+                    <div class="form-error" ng-message="required">Please enter your Email</div>
+
+                    <div ng-messages-include="templates/messages.html"></div>
+                </div>
+
+                <div class="list card" ng-controller="QualificationsListCtrl" ng-show="role=='EMPLOYEE_ROLE'&& !editSelected">
+                    <ion-list>
+                        <ion-item class="item" ng-click="toggleQualifications()" ng-class="{active: isQualificationsListShown}">
+                            <i class="icon" ng-class="isQualificationsListShown ? 'ion-minus' : 'ion-plus'"></i> &nbsp; Your qualifications
+                        </ion-item>
+                        <ion-item class="item-accordion" ng-repeat="qualification in oldUser.qualifications" ng-class-odd="'odd-orange'" ng-class-even="'even'" ng-show="isQualificationsListShown">
+                            <strong>{{qualification.title}}</strong>
+                            <br> Description: {{qualification.description}}
+                        </ion-item>
+                    </ion-list>
+                </div>
+
+                <div class="list card" ng-show="role=='EMPLOYEE_ROLE'&& editSelected">
+                    <div class="item item-divider" style="background-color: #FFFF99">
+                        Edit our qualifications
+                    </div>
+                    <div class="nested" ng-controller="QualificationsBoxCtrl">
+                        <div class="item-list">
+                            <div class="item item-checkbox" ng-repeat="qualification in qualifications track by qualification.qualId">
+                                <label class="checkbox">
+                                    <input type="checkbox" checklist-model="editUser.qualifications" checklist-value="qualification" checklist-comparator="compareFn"></input>
+                                </label>
+                                {{qualification.title}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button ng-show="editSelected" class="button button-positive" ng-disabled="!userProfileForm.$valid" type="submit">Done</button>
+                <button ng-show="editSelected" class="button button-stable" ng-click=disableEdit() type="button">Cancel</button>
+            </div>
+        </form>
+        <br>
+        <div class="text-right">
+            <button ng-show="!editSelected" type="button" class="button button-medium" ng-click="enableEdit()" style="background-color: #FF9900">Edit profile</button>
+            <button ng-show="!editSelected" type="button" class="button button-medium button-calm" ng-click="changePasswordFun()">Change Password</button>
+        </div>
+    </ion-content>
+</ion-view>
